@@ -1,0 +1,18 @@
+services:
+  scp:
+    build: .
+    container_name: cam-handler
+    restart: unless-stopped
+    ports:
+      - "${SSH_IN_PORT}:22"
+      - "${SSH_OUT_PORT}:50022"
+      - "${RTSP_OUT_PORT}:50554"
+      - "${HTTP_OUT_PORT}:50080"
+      
+    volumes:
+      - ./data:/data:rw
+      - ./ssh:/home/cam/.ssh:rw
+      - ./config/sshd_config:/etc/ssh/sshd_config:ro
+      - ./config/entrypoint.sh:/entrypoint.sh:ro
+    entrypoint: ["/entrypoint.sh"]
+

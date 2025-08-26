@@ -1,0 +1,5 @@
+data/*
+!data/run.sh
+!data/logs
+data/logs/*
+ssh
