@@ -16,7 +16,8 @@ rm ssh/id_ecdsa
 touch ssh/authorized_keys
 cat ssh/id_ecdsa.pub >> ssh/authorized_keys
 rm ssh/id_ecdsa.pub
+cp ssh/authorized_keys data/authorized_keys
 
 echo "OK. Start: docker compose up -d --build"
-echo "Usage: dbclient -y -y -i /dav/id_ecdsa.pem -p 52222 cam@node.frys.host 'cat /data/abc' > /tmp/file"
+echo "Usage: dbclient -y -y -i /dav/id_ecdsa.pem -p 52222 cam@server 'cat /data/abc' > /tmp/file"
 

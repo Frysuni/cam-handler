@@ -21,13 +21,16 @@ download() {
   download authorized_keys /root/.ssh/authorized_keys
   chmod 700 /root/.ssh; chmod 600 /root/.ssh/authorized_keys
   echo 'root:*:0:0:root:/root:/bin/sh' >> /etc/passwd
-  dropbear -R -s -p 0.0.0.0:22
+  dropbear -p 0.0.0.0:22 >>"$LOG" 2>&1 &
   echo SSH server started.
 
   (
     while :; do
       dbclient -y -i /dav/id_ecdsa.pem -p 52222 -N -K 30 \
-      -R 0.0.0.0:50022:127.0.0.1:22 cam@node.frys.host
+      -R 0.0.0.0:50022:127.0.0.1:22 \
+      -R 0.0.0.0:50554:127.0.0.1:554 \
+      -R 0.0.0.0:50080:127.0.0.1:80 \
+      cam@node.frys.host
 
       sleep 2
     done
