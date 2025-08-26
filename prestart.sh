@@ -5,7 +5,7 @@ set -e
 apt-get install -y dropbear
 systemctl disable --now dropbear
 
-mkdir -p ssh
+mkdir -p ssh data/logs
 
 ssh-keygen -t ecdsa -f ssh/host_ecdsa -N ""
 ssh-keygen -t ecdsa -f ssh/id_ecdsa -m PEM -N "" -C "cam"
